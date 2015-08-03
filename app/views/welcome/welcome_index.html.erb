@@ -1,0 +1,16 @@
+<div class="row-fluid">
+ 
+<h4>Login</h4>
+<%= simple_form_for :query, url: welcome_index_path(), method: :post, :html => {:class => 'form-horizontal' } do |f| %>
+	<table>
+		<tr>			
+			<td><%= f.input :username, :prompt => "enter username",
+                    label: "Username/Email",
+                    required: true %></td>
+            <td><%= f.input :password,
+            	    label: "Password",
+            	    required: true %></td>
+		</tr>
+	</table>
+<%end%>
+</div>
