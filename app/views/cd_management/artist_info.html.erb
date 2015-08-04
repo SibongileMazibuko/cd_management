@@ -1,0 +1,56 @@
+<br /><div class="row-fluid">
+<div class="span6">
+<h1>Artist Details</h1>
+<h3 class="alert-danger"><%= flash[:error] %></h3>
+<table class="table table-bordered table-striped">
+  <tr><td>Artist Title</td><td> <%=  !@artist.first_name.blank? && !@artist.last_name.blank? ? "#{@artist.first_name} #{@artist.last_name}" : ''%></td></tr>  
+  <tr><td>Email</td><td> <%= @artist.email %></td></tr>
+  <tr><td>Country</td><td> <%= @artist.country %></td></tr>
+  <tr><td>Mobile Number</td><td> <%= @artist.mobile_number %></td></tr>  
+</table>
+
+
+<div class="btn-toolbar">
+  <div class='btn-group'>
+    <%= link_to 'Add Album', add_edit_album_path(query: {id: @artist.id, mode: "Add"}),
+    																  method: :get, class: 'btn btn-mini' %>
+
+    <%= link_to 'Edit Artist Details', add_edit_artist_path(query:{id: @artist.id, mode: "Edit"}), method: :get, class: 'btn btn-mini' %>           
+    <%= link_to 'Delete', delete_artist_path(query:{id: @artist.id}), class: 'btn btn-mini', confirm: "Are you sure you wish to delete #{@artist.first_name} #{@artist.last_name}?" %>		
+	<%= link_to 'Show All Artists', home_index_path(), class: 'btn btn-mini' %>				      					      					      	
+  </div>
+</div>
+
+<% if !@artist_album.blank? %>  
+  <div class='well'>
+      <h4>Artist Albums</h4>
+	  <table class="table table-bordered table-striped">
+	    <tr>
+	      <th>Title Name</th>
+	      <th>Record label</th>
+	      <th>No. of Songs</th>
+	      <th>Cost</th>
+	      <th>Release Date</th>
+	    </tr>
+	    <% @artist_album.each do |data| %>
+	      <tr>
+	      	<td><%= if !data.title_name.blank? then link_to data.title_name, add_edit_album_path(query:{id: @artist.id, album_id: data.id, mode: "Edit"}) end%></td>
+	      	<td><%= data.record_label %></td>
+	      	<td><%= data.number_of_songs%></td>
+	      	<td><%= "R#{number_with_precision(data.cost_amount, :precision =>2)}"%></td>
+	        <td><%= data.release_date.strftime("%Y/%m/%d") %></td>
+	      </tr>
+	    <% end %>
+	  </table>
+  </div>
+<% end %>
+
+</div>
+
+<div class="span4">
+  <div class="ads"><br />
+  	<% t = rand(1..3) %>
+  	<img src="/assets/music<%= t %>.jpg"></div>
+</div>
+
+</div>

@@ -1,16 +1,52 @@
-<div class="row-fluid">
- 
-<h4>Login</h4>
-<%= simple_form_for :query, url: welcome_index_path(), method: :post, :html => {:class => 'form-horizontal' } do |f| %>
-	<table>
-		<tr>			
-			<td><%= f.input :username, :prompt => "enter username",
-                    label: "Username/Email",
-                    required: true %></td>
-            <td><%= f.input :password,
-            	    label: "Password",
-            	    required: true %></td>
-		</tr>
-	</table>
-<%end%>
+<div class='span8'>
+	<div class="well">
+	<h4>Login</h4>	
+	<h3 class="alert-danger"><%= flash[:error] %></h3>
+	<fieldset class="myfieldset">
+		<legend class="mylegend"> Login Details Required</legend>
+		<%= simple_form_for :query, url: welcome_index_path(), method: :post, :html => {:class => 'form-horizontal' } do |f| %>
+			<table>
+				<tr>			
+					<td><%= f.input :username, :prompt => "enter username",
+		                    label: "Username/Email",
+		                    required: true,
+		                    :input_html => {:value =>@username} %></td>
+		        </tr>
+		        <tr>
+		            <td><%= f.input :password,
+		            	    label: "Password",
+		            	    required: true %></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="col-sm-10">
+							<div class="form_button"> 
+					      		<%= f.button :submit, 'Login', 'data-disable-with' => 'Processing...', :class => "btn btn-orange btn-large" %>
+					      		<%= link_to 'Sign-up', sign_up_path,
+					      					'data-disable-with' => 'Processing...', :class => "btn btn-orange btn-large", method: 'get' %>
+					    	</div>
+					    </div>						
+					</td>
+				</tr>
+			</table>
+		<%end%>
+	</fieldset>
+	</div>
 </div>
+
+<style type="text/css">
+	.myfieldset {
+    border: 1px solid #DDD;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+    overflow: hidden;
+	}
+	.mylegend {
+	    font-size: 0.9em;
+	    font-weight:bolder;
+	    width: auto;
+	    border-bottom: 0px;
+	    padding-left:7px;
+	    padding-right: 7px;
+	}
+</style>

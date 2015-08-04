@@ -53,7 +53,33 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  #match 'welcome/index' => 'welcome#index', as: 'index'
+  
   get 'welcome/welcome_index', :controller => 'welcome', :action => 'welcome_index', :as => 'welcome_index'
   root :to => 'welcome#welcome_index'
+  post 'welcome/welcome_index'
+  
+  get 'welcome/sign_up', :controller => 'welcome', :action => 'sign_up', :as => 'sign_up'
+  post 'welcome/sign_up'
+  
+  get '/cd_management/home_index', :controller => 'cd_management', :action => 'home_index', :as => 'home_index'
+  #post '/cd_management/home_index/:id', :controller => 'cd_management', :action => 'home_index', :as => 'home_index'
+  
+  get '/cd_management/add_edit_artist', :controller => 'cd_management', :action => 'add_edit_artist', :as => 'add_edit_artist'
+  post "/cd_management/add_edit_artist"
+  
+  get '/cd_management/artist_info', :controller => 'cd_management', :action => 'artist_info', :as => 'artist_info'
+  post "/cd_management/artist_info"
+  
+  get "/cd_management/add_edit_album_path", :controller => 'cd_management', :action => 'add_edit_album_path', :as => 'add_edit_album_path'
+  post "/cd_management/add_edit_album_path"
+  
+  get '/cd_management/add_edit_album', :controller => 'cd_management', :action => 'add_edit_album', :as => 'add_edit_album'
+  post '/cd_management/add_edit_album'
+  
+  get '/cd_management/delete_artist', :controller => 'cd_management', :action => 'delete_artist', :as => 'delete_artist'
+  post '/cd_management/delete_artist'
+  
+  get '/cd_management/search', :controller => 'cd_management', :action => 'search', :as => 'search'
+  #post '/cd_management/home_index/:id'
+  
 end

@@ -1,0 +1,16 @@
+<div class="span3">
+	<%= simple_form_for :query, url: search_path(), method: :get, :html => {:class => 'form-horizontal' } do |f| %>
+		<table class="table">
+			<tr>
+				<td>Search:</td>
+				<td><%= f.input :choice, :required => false, :prompt => "Please select ...", 
+								:label => false,:collection => ["Artist", "Album", "Record label"],
+								:input_html => {value: ''}%></td>
+				<td><%= f.input :value, :placeholder => "Enter Data...",
+								label: false, 
+								required: false %></td>
+			</tr>
+		</table>
+	<%end%>
+</div>
+<br>

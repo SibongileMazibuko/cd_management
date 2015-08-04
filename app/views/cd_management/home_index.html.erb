@@ -1,0 +1,64 @@
+<div class="row-fluid"> 	
+	<div class="well-large">
+	<h3 class="text-success"><%= flash[:notice] %></h3>
+	<fieldset class="myfieldset">
+		<legend class="mylegend"></legend>		
+		<table class="table table-striped table-bordered">
+			<h1 style="text-align: center">Artists</h1>
+			<%= link_to 'Add Artist', add_edit_artist_path(query:{artist: @artist, mode: "Add"}), 
+						'data-disable-with' => 'Processing...', :id=> "discard", 
+						:class => "btn btn-medium pull-right", method: 'get'%>
+			<thead>
+				<th>Artist Name</th>
+				<th>email</th>
+				<th>Mobile Number</th>
+				<th>Country</th>
+			</thead>
+			<tbody>
+				<% @artists.each do |data|%>
+				<tr>					
+					<td><%= if !data.first_name.blank? and !data.last_name.blank? then link_to "#{data.first_name} #{data.last_name}", artist_info_path(query:{id: data[:id], mode: "Edit"}) end%></td>
+					<td><%= data.email%></td>
+					<td><%= data.mobile_number%></td>
+					<td><%= data.country%></td>							
+				</tr>
+				<%end%>
+			</tbody>		
+		</table>
+	</fieldset>
+	</div>
+	<div class='span2'>
+		<%= simple_form_for :query, url: home_index_path(), method: :get, :html => {:class => 'form-horizontal' } do |f| %>
+		<table class="table">
+			<%= f.hidden_field :search, {:value => true}%>
+			<tr>
+				<td>Search:</td>
+				<td><%= f.input :choice, :required => false, :prompt => "Please select ...", 
+								:label => false,:collection => ["Artist", "Album", "Record label"],
+								:input_html => {value: ''}%></td>
+				<td><%= f.input :data, :placeholder => "Enter Data...",
+								label: false, 
+								required: false %></td>
+				<td><%= f.button :submit, 'Save', 'data-disable-with' => 'Processing...', :class => "btn btn-mini" %></td>
+			</tr>
+		</table>
+	<%end%>
+	</div>
+</div>
+
+<style type="text/css">
+	.myfieldset {
+    border: 1px solid #DDD;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+    overflow: hidden;
+	}
+	.mylegend {
+	    font-size: 0.9em;
+	    font-weight:bolder;
+	    width: auto;
+	    border-bottom: 0px;
+	    padding-left:7px;
+	    padding-right: 7px;
+	}
+</style>
