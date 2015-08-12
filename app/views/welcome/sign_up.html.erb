@@ -1,7 +1,7 @@
 <div class="span8">		
 	<div class="well">
 	<h4>Register</h4>
-	<%= flash[:error] %>
+	<h3 class="alert-danger"><%= flash[:error] %></h3>
 	<fieldset class="myfieldset">
 		<legend class="mylegend"> Sign-up Details Required</legend>
 		<%= simple_form_for :query, url: sign_up_path(), method: :post, :html => {:class => 'form-horizontal' } do |f| %>
